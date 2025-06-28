@@ -2,8 +2,11 @@
 const path =require("path");
 const express = require("express");
 const mongoose =require("mongoose") 
+
+const cookieParser =require('cookie-parser');
 // routers
-const userRouter = require('./routes/user')
+const userRouter = require('./routes/user');
+const { checkForAuthenticationCookie } = require("./middlewares/authentication");
 
 
 //instance of express
@@ -25,9 +28,13 @@ app.set('views',path.resolve("./views"));
 
 //middleware to read form data 
 app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
+app.use(checkForAuthenticationCookie("token"));
 
 app.get('/',(req,res)=>{
-     res.render("home");
+     res.render("home",{
+        user:req.user
+     });
 
 });
 

@@ -30,8 +30,9 @@ router.post('/signin',async(req,res)=>{
             error:"Incorrect Email Or Password"
         })
     }
+})
 
-
-
+router.get('/logout',(req,res)=>{
+    res.clearCookie("token").redirect("/");
 })
 module.exports=router;

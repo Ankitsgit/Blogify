@@ -9,6 +9,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
+        <% if(locals.user){%>
         <li class="nav-item">
           <a class="nav-link" href="#">Add blog</a>
         </li>
@@ -17,12 +18,19 @@
             Ankit Shukla
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Log out</a></li>
+            <li><a class="dropdown-item" href="/user/logout">Log out</a></li>
             <li><hr class="dropdown-divider"></li>
            
           </ul>
         </li>
-
+          <% } else{%>
+                <li class="nav-item">
+                   <a class="nav-link active" aria-current="" href="user/signup">create Account</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link active" aria-current="page" href="user/signin">Signin</a>
+                </li>
+            <% } %>
       </ul>
  
     </div>
