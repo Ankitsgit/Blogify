@@ -2,10 +2,12 @@
 const path =require("path");
 const express = require("express");
 const mongoose =require("mongoose") 
-
 const cookieParser =require('cookie-parser');
+
+const Blog =require("./models/blog");
 // routers
 const userRouter = require('./routes/user');
+const blogRouter =require('./routes/blog');
 const { checkForAuthenticationCookie } = require("./middlewares/authentication");
 
 
@@ -28,18 +30,22 @@ app.set('views',path.resolve("./views"));
 
 //middleware to read form data 
 app.use(express.urlencoded({extended:false}));
-app.use(cookieParser());
-app.use(checkForAuthenticationCookie("token"));
+app.use(cookieParser());// to parse to cookie
+app.use(checkForAuthenticationCookie("token"));// to check authentication 
+app.use(express.static(path.resolve('./public')));  
 
-app.get('/',(req,res)=>{
-     res.render("home",{
-        user:req.user
-     });
-
-});
+app.get('/',async(req,res)=>{
+    const allBlogs = await Blog.find({});
+    return res.render('home',{
+        user: req.user,
+        blogs: allBlogs
+    });
+})
 
 
 app.use('/user',userRouter);// agr koi bhi request user se start hoti hai userRouter ko use karo
+app.use('/blog',blogRouter);
+
 
 
 app.listen(PORT,()=>{
