@@ -33,15 +33,14 @@ Blogify is a dynamic blog platform where users can register, log in, create, and
 
 Blogify/
 │
-├── models/ # Mongoose schemas for Blog and User
-├── routes/ # Express route handlers
-├── views/ # EJS templates (SSR)
-├── public/ # Static files (CSS, images)
-├── middleware/ # Authentication middlewares
-├── controllers/ # Optional: logic separation
-├── .env # Environment variables
-├── index.js.js # Main server file
-└── package.json # NPM dependencies
+├── models/          # Contains Mongoose schemas for Blog and User
+├── routes/          # All Express.js route handlers (auth, blog, etc.)
+├── views/           # EJS templates for server-side rendering
+├── public/          # Static files like CSS, JS, images
+├── middleware/      # Custom middleware functions (e.g., JWT auth)
+├── controllers/     # (Optional) Business logic separated from routes
+├── index.js           # Entry point for the Node.js application
+└── package.json     # NPM metadata and dependency list
 
 ---
 
